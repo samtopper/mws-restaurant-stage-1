@@ -10,7 +10,7 @@ window.initMap = () => {
       console.error(error);
     } else {
       self.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
+        zoom: 18,
         center: restaurant.latlng,
         scrollwheel: false
       });
@@ -117,21 +117,33 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
-  name.innerHTML = review.name;
-  li.appendChild(name);
 
-  const date = document.createElement('p');
-  date.innerHTML = review.date;
-  li.appendChild(date);
+  const nameAndDate = document.createElement('div')
+  nameAndDate.className = 'nameAndDate'
+    const name = document.createElement('p');
+    name.className = 'name'
+    name.innerHTML = review.name;
+    nameAndDate.appendChild(name);
 
-  const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+    const date = document.createElement('p');
+    date.className = 'date'
+    date.innerHTML = review.date;
+    nameAndDate.appendChild(date);
 
-  const comments = document.createElement('p');
-  comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  li.appendChild(nameAndDate)
+
+  const ratingAndComments = document.createElement('div')
+    ratingAndComments.className = 'ratingAndComments'
+    const rating = document.createElement('p');
+    rating.className = 'rating'
+    rating.innerHTML = `Rating: ${review.rating}`;
+    ratingAndComments.appendChild(rating);
+
+    const comments = document.createElement('p');
+    comments.className = 'comments'
+    comments.innerHTML = review.comments;
+    ratingAndComments.appendChild(comments);
+  li.appendChild(ratingAndComments)
 
   return li;
 }
