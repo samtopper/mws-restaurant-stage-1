@@ -10,7 +10,6 @@ body,td,th,p{
 body {
 	background-color: #fdfdfd;
 	margin: 0;
-  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -296,6 +295,13 @@ nav h1 a {
   height: auto;
   margin-left: 10px;
 }
+
+@media screen and (max-width: 600px) {
+  #restaurant-img-cuisine, #restaurant-address-hours {
+    width: 100%;
+  }
+}
+
 #restaurant-name {
   color: #cb202d;
   font-family: Arial,sans-serif;
@@ -305,6 +311,7 @@ nav h1 a {
   text-transform: uppercase;
   line-height: 1.1;
   width:100%;
+  text-align: center;
 }
 #restaurant-img {
   width: 100%;
