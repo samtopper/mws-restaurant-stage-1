@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css">  
+  <link rel="stylesheet" href="dest/css/sass/styles.css">  
 </head>
 
 <body>
@@ -25,13 +25,13 @@
     </section>
     <section>
       <div class="filter-options">
-        <h2>Filter Results</h2>
+        <h2 >Filter Results</h2>
         <div class="filter-selects">
-          <select role="tablist" tabindex="2" id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
-            <option value="all">All Neighborhoods</option>
+          <select role="tablist" tabindex="2" id="neighborhoods-select" aria-label='filter neighborhoods' name="neighborhoods" onchange="updateRestaurants()">
+            <option value="all"><label for='neighborhoods-select'>All Neighborhoods</label> </option>
           </select>
-          <select role="tablist" tabindex="2" id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
-            <option value="all">All Cuisines</option>
+          <select role="tablist" tabindex="2" id="cuisines-select" aria-label='filter cuisines' name="cuisines" onchange="updateRestaurants()">
+            <option value="all"><label for='cuisines-select'>All Cuisines</label></option>
           </select>
         </div>
         
@@ -40,8 +40,8 @@
     </section>
   </main>
 
-  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+  <script type="application/javascript" charset="utf-8" src="src/js/dbhelper.js"></script>
+  <script type="application/javascript" charset="utf-8" src="src/js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLVBC2tEnzXu_fprxgEMbvaas53Q01n9I&v=3&libraries=places&callback=initMap"></script>
  
 

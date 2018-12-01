@@ -1,0 +1,41 @@
+{
+  "name": "mws-stage-2",
+  "version": "1.0.0",
+  "description": "This is stage-1 project of MWS nanodegree. \r For the Restaurant Reviews projects, I have incrementally converted a static webpage to a mobile-ready web application. In Stage One, I have taken a static design that lacks accessibility and converted the design to be responsive on different sized displays and accessible for screen reader use. I have added a service worker to begin the process of creating a seamless offline experience for my users.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.26.3",
+    "grunt": "^1.0.3",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-responsive": "^2.11.0",
+    "gulp-sass": "^4.0.2",
+    "idb": "^2.1.3",
+    "imagemin-pngquant": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-watch": "^5.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samtopper/mws-restaurant-stage-1.git"
+  },
+  "keywords": [
+    "gulp",
+    "mws-stage-2"
+  ],
+  "author": "sameer khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samtopper/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/samtopper/mws-restaurant-stage-1#readme"
+}
