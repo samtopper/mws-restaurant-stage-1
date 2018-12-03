@@ -11,7 +11,9 @@ In Stage Two,
 
 ## Getting Started
 
-In this folder, 
+First, run the server from https://github.com/udacity/mws-restaurant-stage-2
+
+then in this folder, 
 run: npm install
 
 & after successful installation of modules,

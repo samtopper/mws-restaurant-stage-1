@@ -1,3 +1,5 @@
+// self.importScripts('src/js/idb.js')
+
 /**
  * Common database helper functions.
  */
@@ -7,54 +9,72 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
 
-	// http://localhost:1337/restaurants
-
 	static get DATABASE_URL() {
 		const port = 1337 // Changed this to my server port
 		return `http://localhost:${port}/restaurants`
-  }
+  	}
 
-	static addRestaurantsToIdb() {
-		// adding to restaurants store
-		dbPromise.then(function(db) {
-			const tx = db.transaction('restaurants', 'readwrite')
-			const restaurantStore = tx.objectStore('restaurants')
-			DBHelper.fetchRestaurants(() => console.log('dksafd;lsfkdsjf;k'))
-			restaurantStore.put({
-				name: 'sameerdd',
-				id: 22,
-				favoriteLanguage: 'Urdu'
+  // initialize 'restaurants-db' idb
+  	static dbInit() {
+	const dbPromise = idb.open('restaurants-db', 1, function(upgradeDb) {
+		switch(upgradeDb.oldVersion) {
+		case 0:
+			const restaurantStore = upgradeDb.createObjectStore('restaurants', {
+				keyPath: 'id'
 			})
-			return tx.complete
-		}).then( () => {
-				console.log('added to restaurants')
-			})
-  }
-  
-	/**
-   * Fetch all restaurants.
-   */
-	static fetchRestaurants(callback) {
+			restaurantStore.createIndex('by-name','name')
+		}
+	})
+	return dbPromise;
+  	}
 
-		fetch(DBHelper.DATABASE_URL)
-			.then(response => response.json())
-			.then(res => {
-				console.log('save this data into idb', res)
-				// first fetch data from indexedDb then from url, check knowledge hub question
+	// save data into 'restaurants' Idb
+	static saveDataInDb(data) {
+			return DBHelper.dbInit().then(db => {
+		
+			if (!db) return;
 
-				if(1){
-					const tx = db.transaction('restaurants', 'readwrite')
-					const store = tx.objectStore('restaurants')
-					res.forEach( (restaurantData) => store.put(restaurantData))
-				}
-				callback(null, res)
-			})
-			.catch(e => {
-				console.log('error',e)
-				callback(e, null)
-			})
+			const store = db.transaction('restaurants', 'readwrite').objectStore('restaurants')
+			data.forEach( (eachRestaurant) => 
+				store.put(eachRestaurant)
+			)
+		})
 	}
 
+	static fetchFromUrlAndSave() {
+		return fetch(DBHelper.DATABASE_URL)
+		.then(response => response.json())
+		.then(allRestaurants => {
+			console.log('save this data into idb', allRestaurants)
+			DBHelper.saveDataInDb(allRestaurants)
+		})
+	}
+
+	static getDataFromCache() {
+		return DBHelper.dbInit().then(db => {
+			if (!db) return;
+			// get data from cache
+			const store = db.transaction('restaurants').objectStore('restaurants')
+			return store.getAll()
+		})
+	}
+
+/* Fetch all restaurants.*/
+	static fetchRestaurants(callback) {
+		// getting data from cache, if not found get it from url & save it
+		return DBHelper.getDataFromCache().then( allRestaurants => {
+			if(allRestaurants.length > 0) {
+				return Promise.resolve(allRestaurants)
+			} else {
+				return DBHelper.fetchFromUrlAndSave()
+			}
+		}).then( allRestaurants => {
+			callback(null, allRestaurants)
+		}).catch(err => {
+			console.log('error',err)
+			callback(err, null)
+		})
+	}
 
 	/**
    * Fetch a restaurant by its ID.
@@ -169,8 +189,6 @@ class DBHelper {
    */
 	static urlForRestaurant(restaurant) {
 		return (`restaurant.html?id=${restaurant.id}`)
-    // return (`http://localhost:1337/restaurants/${restaurant.id}`);
-
   }
 
 	/**
