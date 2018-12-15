@@ -1,6 +1,6 @@
 # Mobile Web Specialist Certification Course
 
-This is stage-2 project of MWS nanodegree. 
+This contains stage-1, stage-2 projects of MWS nanodegree. 
 
 In Stage Two, 
 * I have taken the responsive, accessible design I built in Stage One and connected it to an external server. 
